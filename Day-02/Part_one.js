@@ -999,17 +999,85 @@ const input = `1-8 n: dpwpmhknmnlglhjtrbpx
 11-14 g: ggggggggggggggggg
 6-7 q: qqqqvqhq`;
 
-var countValid = 0;
-var listArray = input.split("\n")
+const testData = `1-3 a: abcde
+1-3 b: cdefg
+2-9 c: ccccccccc`
+
+var countValid1 = 0;
+//Count of calid passwords for part 1
+var countValid2 = 0;
+//Count of calid passwords for part 2
+var listArray = input.split("\n");
+//var listArray = testData.split("\n");
 
 listArray.forEach(fullString => {
-    var componant = fullString.split(/[-\s,: ]+/);
-    var minRange = parseInt(componant[0]);
-    var maxRange = parseInt(componant[1]);
-    var letter = componant[2];
-    var match = componant[3].split(letter).length-1;
-    if (match>=minRange && match<=maxRange){
-        countValid++;
+    var componant = fullString.split(/[-\s,: ]+/);    
+    //Array of String componants
+    var minRange = parseInt(componant[0]);            
+    //First integer of componant array
+    var maxRange = parseInt(componant[1]);            
+    //Second integer of componant array
+    var letter = componant[2];                        
+    //Specified Letter of integer of componant array
+    var match = componant[3].split(letter).length - 1;  
+    //Length of password String
+    var password = componant[3];
+    var chk1 = false;
+    var chk2 = false;
+    if (match >= minRange && match <= maxRange) {
+        countValid1++;
+    }
+    if (password.charAt(minRange-1) === letter){
+        chk1 = true;
+        console.log("hit1");
+    }
+    if (password.charAt(maxRange-1) === letter){
+        chk2 = true;
+        console.log("hit2");
+    }
+    if (chk1 !== chk2){
+        if (chk1 === true || chk2 === true){
+            countValid2++;
+            console.log("hit3");
+
+        }
     }
 })
-console.log(countValid);
+
+//Testing
+// var testString = "6-7 q: 12345678"
+// var componant = testString.split(/[-\s,: ]+/);    
+// //Array of String componants
+// var minRange = parseInt(componant[0]);            
+// //First integer of componant array
+// var maxRange = parseInt(componant[1]);            
+// //Second integer of componant array
+// var letter = componant[2];                        
+// //Specified Letter of integer of componant array
+// var match = componant[3].split(letter).length - 1;  
+// //Length of password String
+// var password = componant[3];
+// var count2 = false;
+// if (match >= minRange && match <= maxRange) {
+//     countValid1++;
+// }
+// if (password.charAt(minRange+1) === letter){
+//     count2 = true;
+// }
+// if (password.charAt(maxRange+1) === letter && count2 === false){
+//     countValid2++;
+// }
+
+
+console.log(countValid1);
+console.log(countValid2);
+
+
+// console.log("----------");
+// console.log(minRange);
+// console.log(password.charAt(minRange-1));
+// console.log(maxRange);
+// console.log(password.charAt(maxRange-1));
+// console.log(password);
+// console.log(letter);
+// console.log("----------");
