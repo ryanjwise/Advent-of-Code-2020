@@ -1,3 +1,5 @@
+// @ts-check
+
 //Parse a string array and return its fields as objects.
 function parseFields(str) {
   const parts = str.split(/\s/);

@@ -1,3 +1,5 @@
+// @ts-check
+
 //var initialisation
 var uniquePassport = input.split("\n\n");
 var validPassports = [];
@@ -11,6 +13,7 @@ const requiredFields = [
   "ecl", //[5]
   "pid",
 ]; //[6]
+var countValid = 0;
 
 //parse unique Passports fields into a table array
 const rows = uniquePassport.map(parseFields);
@@ -25,7 +28,6 @@ for (let row of rows) {
 }
 
 console.log("Number of passports with all fields: ", allRequiredFields);
-countValid = 0;
 
 console.table(validPassports);
 //perform checks on data
@@ -45,7 +47,6 @@ for (let row of validPassports) {
   }
   //Validate HGT
   if (isValid) {
-    var length = row.hgt.length;
     var unit = row.hgt.substring(row.hgt.length - 2, row.hgt.length);
     var hgt = Number(row.hgt.substring(0, row.hgt.length - 2));
     isValid = validateHGT(hgt, unit);
